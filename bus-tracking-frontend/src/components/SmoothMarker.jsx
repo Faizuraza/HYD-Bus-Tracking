@@ -17,30 +17,32 @@ function SmoothMarker({
 }) {
 
   const [position, setPosition] =
-    useState({
+  useState(() => ({
 
-      lat: bus.coordinates[1],
+    lat: bus.coordinates[1],
 
-      lng: bus.coordinates[0]
+    lng: bus.coordinates[0]
 
-    });
+  }));
 
   const animationRef =
     useRef(null);
 
   useEffect(() => {
 
+  setPosition(prevPosition => {
+
+    const start = {
+
+      ...prevPosition
+
+    };
+
     const newPosition = {
 
       lat: bus.coordinates[1],
 
       lng: bus.coordinates[0]
-
-    };
-
-    const start = {
-
-      ...position
 
     };
 
@@ -99,16 +101,19 @@ function SmoothMarker({
         animate
       );
 
-    return () => {
+    return prevPosition;
 
-      cancelAnimationFrame(
-        animationRef.current
-      );
+  });
 
-    };
+  return () => {
 
-  }, [bus.coordinates]);
+    cancelAnimationFrame(
+      animationRef.current
+    );
 
+  };
+
+}, [bus.coordinates]);
   return (
 
     <Marker
