@@ -169,29 +169,33 @@ function App() {
 
   useEffect(() => {
 
-    if (!selectedRoute)
-      return;
+  if (
+    !selectedRoute ||
+    !selectedRoute.stops ||
+    selectedRoute.stops.length === 0
+  ) {
+    setRoutePath([]);
+    return;
+  }
 
-    const path =
-      selectedRoute.stops.map(
-        (stop) => ({
+  const path =
+    selectedRoute.stops
+      .filter(
+        stop =>
+          stop &&
+          stop.coordinates &&
+          stop.coordinates.length === 2
+      )
+      .map(stop => ({
+        lat: Number(stop.coordinates[1]),
+        lng: Number(stop.coordinates[0])
+      }));
 
-          lat:
-            stop.coordinates[1],
+  setRoutePath(path);
 
-          lng:
-            stop.coordinates[0]
+  setRouteDetails(selectedRoute);
 
-        })
-      );
-
-    setRoutePath(path);
-
-    setRouteDetails(
-      selectedRoute
-    );
-
-  }, [selectedRoute]);
+}, [selectedRoute]);
 
   // ======================
   // FIT MAP TO ROUTE

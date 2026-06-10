@@ -61,13 +61,28 @@ function MapView({
   </div>
 
 </div>
-      <Polyline
-        path={routePath}
-        options={{ strokeColor: "#2563EB",
-          strokeOpacity: 1,
-          strokeWeight: 6
-        }}
-      />
+      {
+  routePath &&
+  routePath.length > 1 && (
+
+    <Polyline
+
+      path={routePath}
+
+      options={{
+
+        strokeColor:"#2563EB",
+
+        strokeOpacity:1,
+
+        strokeWeight:6
+
+      }}
+
+    />
+
+  )
+}
 
       {
   Object.values(buses).map((bus) => (
