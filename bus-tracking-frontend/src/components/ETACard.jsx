@@ -3,6 +3,8 @@ import {
   useState
 } from "react";
 
+import API_BASE_URL from "../config/api";
+
 function ETACard({
 
   selectedStop,
@@ -28,12 +30,9 @@ function ETACard({
 
         try {
 
-          const response =
-            await fetch(
-
-              `http://localhost:5000/api/eta?stopName=${selectedStop}&routeNumber=${selectedRoute.routeNumber}`
-
-            );
+          const response = await fetch(
+  `${API_BASE_URL}/api/eta?stopName=${selectedStop}&routeNumber=${selectedRoute.routeNumber}`
+);
 
           const data =
             await response.json();
