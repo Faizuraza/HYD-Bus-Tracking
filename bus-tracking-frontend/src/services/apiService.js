@@ -1,4 +1,5 @@
-import { API_BASE_URL } from "./api";
+
+import API_BASE_URL from "../config/api";
 
 /**
  * Searches stops by a partial text query.
