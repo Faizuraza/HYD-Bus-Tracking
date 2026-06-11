@@ -31,8 +31,8 @@ function ETACard({
         try {
 
           const response = await fetch(
-  `${API_BASE_URL}/api/eta?stopName=${selectedStop}&routeNumber=${selectedRoute.routeNumber}`
-);
+ `${API_BASE_URL}/api/eta/nearest-bus?stopName=${selectedStop}&routeNumber=${selectedRoute.routeNumber}`
+)
 
           const data =
             await response.json();
